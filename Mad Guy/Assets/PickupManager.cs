@@ -8,6 +8,7 @@ public class PickupManager : MonoBehaviour
     public float currentHealth;
     public float totleHealth = 200;
     
+    
     public PickupManager()
     {
         currentHealth = totleHealth;

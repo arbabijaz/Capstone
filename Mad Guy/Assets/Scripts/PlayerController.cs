@@ -12,15 +12,12 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     float horizontal;
     Rigidbody rb;
-    //public GameObject bullet;
-    //public GameObject firePoint;
-    bool doubleJump = false;
-    bool onGround = true;
     public float totalhealth=100;
     public float currentHealth;
     public bool isAlive = true;
     public float score = 0;
     public TextMeshProUGUI scoreTxt;
+    public GameObject levelComplete;
     
     
     void Start()
@@ -38,21 +35,14 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * speed *horizontal* Time.deltaTime);
         animator.SetFloat("Speed", horizontal);
 
-        
-
-        if (onGround)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                animator.SetTrigger("isJump");
-            }
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetTrigger("isJump");
         }
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    Debug.Log("Mouse Down");
-        //    fire();
-        //}
+
+        
+       
         
 
 
@@ -66,12 +56,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    //void fire()
-    //{
-    //    GameObject bulletfire;
-    //    bulletfire = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
-    //    Destroy(bulletfire, 2f);
-    //}
+    
     public void setHealth(float heal)
     {
         if (healthchecker())
@@ -133,6 +118,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("bullet"))
         {
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("FinishLine"))
+        {
+            collision.gameObject.SetActive(true);
         }
     }
 }

@@ -7,6 +7,7 @@ public class enemycontroller : MonoBehaviour
     public float health = 100;
     public GameObject killPoints;
     Animator animator;
+    Vector3 offset = new Vector3(0, 1, 0);
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class enemycontroller : MonoBehaviour
     }
     void KillPoints()
     {
-        Instantiate(killPoints, transform.position, killPoints.transform.rotation);
+        Instantiate(killPoints, transform.position+offset, killPoints.transform.rotation);
     }
     private void OnCollisionEnter(Collision collision)
     {
